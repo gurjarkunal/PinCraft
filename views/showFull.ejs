@@ -1,0 +1,36 @@
+<% include ./partials/header.ejs %>
+<div class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white">
+    <div class="cards flex flex-wrap gap-10 items-center justify-center">
+        <div class="card w-50 ">
+            <div class="w-full h-96 bg-sky-200 rounded-lg object-cover overflow-hidden">
+                <img class="w-full h-96" id="displayedImage" alt="Selected Image">
+            </div>
+                <h5 id="imageTitle" class="mt-2 text-3xl"></h5>
+                <h5 id="imageDescription" class="mt-2 text-xl"></h5>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript function to get the image details from URL parameters
+    function getImageDetailsFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            img: urlParams.get('img'),
+            title: urlParams.get('title'),
+            desc: urlParams.get('desc'),
+        };
+    }
+
+    // Set the image source and details based on the retrieved parameters
+    const imageDetails = getImageDetailsFromURL();
+    if (imageDetails.img) {
+        document.getElementById('displayedImage').src = imageDetails.img;
+        document.getElementById('imageTitle').innerText = imageDetails.title || 'No Title';
+        document.getElementById('imageDescription').innerText = imageDetails.desc || 'No Description';
+    } else {
+        // Handle the case when no image path is provided
+        console.error('No image path provided.');
+    }
+</script>
+<% include ./partials/footer.ejs %>

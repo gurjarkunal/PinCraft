@@ -1,0 +1,25 @@
+<% include ./partials/header.ejs %>
+<div class="w-full min-h-screen bg-zinc-800 px-10 py-5 text-white">
+    <h1 class="text-xl">Create a new post.</h1>
+    <hr class="opacity-10 mt-3">
+    <div class="flex items-center justify-center mt-5">
+        <form class="w-full max-w-md">
+            <div class="mb-4">
+                <input class="block w-full px-3 py-2" type="file" name="postimage">
+            </div>
+            <div class="mb-4">
+                <input class="text-black block w-full px-3 py-2 rounded-md border-2" type="text" placeholder="Title" name="title">
+            </div>
+            <div class="mb-4">
+                <textarea class="text-black block w-full px-3 py-2 rounded-md border-2" placeholder="Description" rows="10" name="description"></textarea>
+            </div>
+            <div>
+                <input class="block w-full px-3 py-2 rounded-md bg-red-700" type="submit" value="Create Post">
+            </div>
+        </form>
+    </div>
+</div>
+
+<% include ./partials/footer.ejs %>
+
+<!-- <div class="flex items-center text-center justify-center"></div> -->
