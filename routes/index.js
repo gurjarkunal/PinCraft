@@ -8,14 +8,19 @@ const postModel = require("./post");
 const upload = require("./multer");
 passport.use(new localStrategy(userModel.authenticate()));
 
+// router.get("/", function (req, res, next) {
+//   res.render("index", {nav: false, title: "Login", error: req.flash("error"),
+//   });
+// });
+
 router.get("/", function (req, res, next) {
-  res.render("index", {nav: false, title: "Login", error: req.flash("error"),
+  res.render("regLog", {nav: false, title: "Login", error: req.flash("error"),
   });
 });
 
-router.get("/register", function (req, res, next) {
-  res.render("register", { nav: false, title: "Register" });
-});
+// router.get("/register", function (req, res, next) {
+//   res.render("register", { nav: false, title: "Register" });
+// });
 
 router.get("/profile", isLoggedIn, async function (req, res, next) {
   const user = await userModel
