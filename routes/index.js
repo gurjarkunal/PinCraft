@@ -26,7 +26,8 @@ router.get("/profile", isLoggedIn, async function (req, res, next) {
   const user = await userModel
     .findOne({ username: req.session.passport.user })
     .populate("posts");
-  res.render("profile", { user, nav: true, title: "Profile" });
+  const posts = await postModel.find().populate("user");
+  res.render("profile", { user, posts, nav: true, title: "Profile" });
 });
 
 // router.get("/show", isLoggedIn, async function (req, res, next) {
@@ -37,14 +38,40 @@ router.get("/profile", isLoggedIn, async function (req, res, next) {
 // });
 
 router.get("/showfull", isLoggedIn, async function (req, res, next) {
-  res.render("showfull", { nav: true, title: "My All Pins" });
+  const user = await userModel.findOne({ username: req.session.passport.user });
+    const posts = await postModel.find().populate("user");
+  res.render("showfull", { user, posts, nav: true, title: "PinCraft" });
+});
+
+router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({username: req.session.passport.user})
+  // console.log("I am here",req.params.id);
+  const post = await postModel.findOne({_id: req.params.id})
+  console.log(post);
+  const id = post.favourites.indexOf(user._id);
+  if (id === -1) {
+    post.favourites.push(user._id);
+  } else {
+    post.favourites.splice(id, 1);
+  }
+
+  await post.save()
+  console.log(post);
+  res.redirect("/favourites")
 });
 
 router.get("/feed", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   const posts = await postModel.find().populate("user");
 
-  res.render("feed", { user, posts, nav: true, title: "Feed" });
+  res.render("feed2", { user, posts, nav: true, title: "Feed" });
+});
+
+router.get("/favourites", isLoggedIn, async function (req, res, next) {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const posts = await postModel.find().populate("user");
+
+  res.render("favourites", { user, posts, nav: true, title: "Favourites" });
 });
 
 router.get("/add", isLoggedIn, async function (req, res, next) {
@@ -90,7 +117,6 @@ router.post(
 
 router.post("/register", function (req, res) {
   let userdata = new userModel(({ username, email, fullname } = req.body));
-
   userModel.register(userdata, req.body.password).then(function () {
     passport.authenticate("local")(req, res, function () {
       res.redirect("/profile");

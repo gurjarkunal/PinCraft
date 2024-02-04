@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/stylesheets/styleRegLog.css">
     <title>Login</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </head>
 
 <body>
@@ -36,7 +37,7 @@
             <form action="/login" method="post">
                 <h1>Sign In</h1>
                 <% if (error.length > 0){ %>
-                    <p class="error text-red-700 text-center"><%= error %></p>
+                    <p class="error"><%= error %></p>
                     <% } %>
                 <div class="social-icons">
                     <!-- <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>

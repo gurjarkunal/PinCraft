@@ -35,6 +35,16 @@ body{
     margin: 20px 0;
 }
 
+.container form p{
+    font: red;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+    padding: 0;
+}
+
+
 .container span{
     font-size: 12px;
 }
@@ -163,7 +173,7 @@ body{
 .toggle{
     background-color: #ff0000;
     height: 100%;
-    background: linear-gradient(to right, #ff5e5e, #ff0000);
+    background: linear-gradient(to right, #ff0000, #ff0000);
     color: #fff;
     position: relative;
     left: -100%;

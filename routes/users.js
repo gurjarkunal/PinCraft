@@ -6,10 +6,22 @@ mongoose.connect("mongodb://127.0.0.1:27017/pin");
 
 // Define the user schema
 const userSchema = new Schema({
-  username: String,
-  email: String,
-  fullname: String,
-  password: String,
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  fullname: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
   profileImage: String,
   board:{
     type: Array,
