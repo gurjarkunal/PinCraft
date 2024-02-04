@@ -28,12 +28,6 @@ a img:hover{
   transition: filter .5s ease-in-out;
 }
 
-#btn {
-  /* display: none; */
-  /* position: absolute; */
-  /* top: 95px;
-  left: 75px; */
-}
 
 .container .box a:hover #btn{
   display: block;
