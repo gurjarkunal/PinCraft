@@ -56,7 +56,6 @@ router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
   }
 
   await user.save()
-  // console.log(post);
   res.redirect("/feed")
 });
 
@@ -88,7 +87,7 @@ router.get("/favourites", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   const post = await userModel.find().populate("favourites");
   const postIds = user.favourites.map(favourites => favourites);
-  console.log("i am here", postIds);
+  // console.log("i am here", postIds);
   postModel.find({ _id: { $in: postIds } })
   .then(posts => {
     // Now 'posts' contains an array of post objects
