@@ -47,16 +47,33 @@ router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({username: req.session.passport.user})
   // console.log("I am here",req.params.id);
   const post = await postModel.findOne({_id: req.params.id})
-  console.log(post);
-  const id = post.favourites.indexOf(user._id);
+
+  const id = user.favourites.indexOf(post._id);
   if (id === -1) {
-    post.favourites.push(user._id);
+    user.favourites.push(post._id);
   } else {
-    post.favourites.splice(id, 1);
+    user.favourites.splice(id, 1);
   }
 
-  await post.save()
-  console.log(post);
+  await user.save()
+  // console.log(post);
+  res.redirect("/feed")
+});
+
+router.get("/favourites/:id", isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({username: req.session.passport.user})
+  // console.log("I am here",req.params.id);
+  const post = await postModel.findOne({_id: req.params.id})
+
+  const id = user.favourites.indexOf(post._id);
+  if (id === -1) {
+    user.favourites.push(post._id);
+  } else {
+    user.favourites.splice(id, 1);
+  }
+
+  await user.save()
+  // console.log(post);
   res.redirect("/favourites")
 });
 
@@ -64,14 +81,27 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   const posts = await postModel.find().populate("user");
 
-  res.render("feed2", { user, posts, nav: true, title: "Feed" });
+  res.render("feed", { user, posts, nav: true, title: "Feed" });
 });
 
 router.get("/favourites", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
-  const posts = await postModel.find().populate("user");
-
-  res.render("favourites", { user, posts, nav: true, title: "Favourites" });
+  const post = await userModel.find().populate("favourites");
+  const postIds = user.favourites.map(favourites => favourites);
+  console.log("i am here", postIds);
+  postModel.find({ _id: { $in: postIds } })
+  .then(posts => {
+    // Now 'posts' contains an array of post objects
+    // You can use 'posts' to render the data in your template
+    res.render('favourites', { user, posts,  nav: true, title: "Favorites" });
+  })
+  .catch(error => {
+    // Handle the error appropriately
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  });
+  // console.log("I am here again",post);
+  // res.render("favourites", { user, post, nav: true, title: "Favourites" });
 });
 
 router.get("/add", isLoggedIn, async function (req, res, next) {
