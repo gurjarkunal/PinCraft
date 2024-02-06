@@ -1,7 +1,7 @@
 <% include ./partials/header.ejs %>
 <div class="w-full min-h-screen bg-zinc-800 px-10 py-8 text-white">
     <div class="cards flex flex-wrap justify-start gap-3">
-        <% posts.forEach(post =>{%>
+        <% posts.forEach(post =>{ %>
             <a
               href="/showfull/?img=/images/uploads/<%= post.image %>&title=<%= post.title %>&desc=<%= post.description %>&username=<%= user.username %>"
               class="card w-50"
@@ -14,17 +14,20 @@
                     alt=""
                   />
                 </div>
-                <h6 class="mt-2 text-xs font-semibold opacity-50">@<%= user.username%></h6>
-                <a href="/favourites/<%= post._id %>">
+                <div class="flex">
+                  <h6 class="mt-2 text-xs font-semibold opacity-50">@<%= post.user.username %></h6>
+                <a class="ml-5 mt-1" href="/favourites/<%= post._id %>">
                   <% if (user.favourites.indexOf(post._id) !== -1){ %>
                     <i class="ri-star-fill text-red-600"></i>
                   <% } else { %>
                       <i class="ri-star-line"></i>
                     <% } %>
                   </a>
+                </div>
+                
               </div>
             </a>
-            <%})%>
+            <% }) %>
     </div>
 </div>
 <% include ./partials/footer.ejs %>

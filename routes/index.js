@@ -22,6 +22,11 @@ router.get("/", function (req, res, next) {
 //   res.render("register", { nav: false, title: "Register" });
 // });
 
+router.get("/forgetPass", function (req, res, next) {
+  res.render("forgetPass", { nav: false, title: "Register" });
+});
+
+
 router.get("/profile", isLoggedIn, async function (req, res, next) {
   const user = await userModel
     .findOne({ username: req.session.passport.user })
@@ -47,14 +52,12 @@ router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({username: req.session.passport.user})
   // console.log("I am here",req.params.id);
   const post = await postModel.findOne({_id: req.params.id})
-
   const id = user.favourites.indexOf(post._id);
   if (id === -1) {
     user.favourites.push(post._id);
   } else {
     user.favourites.splice(id, 1);
   }
-
   await user.save()
   res.redirect("/feed")
 });
@@ -87,8 +90,7 @@ router.get("/favourites", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   const post = await userModel.find().populate("favourites");
   const postIds = user.favourites.map(favourites => favourites);
-  // console.log("i am here", postIds);
-  postModel.find({ _id: { $in: postIds } })
+  postModel.find({ _id: { $in: postIds } }).populate("user")
   .then(posts => {
     // Now 'posts' contains an array of post objects
     // You can use 'posts' to render the data in your template
@@ -144,14 +146,34 @@ router.post(
   }
 );
 
+// router.post("/register", function (req, res) {
+//   let userdata = new userModel(({ username, email, fullname } = req.body));
+//   userModel.register(userdata, req.body.password).then(function () {
+//     passport.authenticate("local")(req, res, function () {
+//       res.redirect("/profile");
+//     });
+//   });
+// });
+
 router.post("/register", function (req, res) {
-  let userdata = new userModel(({ username, email, fullname } = req.body));
-  userModel.register(userdata, req.body.password).then(function () {
+  const { username, email, fullname, password } = req.body;
+
+  // Check if any required field is null
+  if (!username || !email || !fullname || !password) {
+    // Render an error page or send an appropriate response
+    return res.render("regLog", {error: req.flash("error"),
+  });
+  }
+
+  let userdata = new userModel({ username, email, fullname });
+
+  userModel.register(userdata, password).then(function () {
     passport.authenticate("local")(req, res, function () {
       res.redirect("/profile");
     });
   });
 });
+
 
 router.post(
   "/login",
