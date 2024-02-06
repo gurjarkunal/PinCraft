@@ -90,6 +90,7 @@ router.get("/favourites", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   const post = await userModel.find().populate("favourites");
   const postIds = user.favourites.map(favourites => favourites);
+  if (postIds.length <= 0) res.render('favouritesEmpty', {nav: true, title: "Favorites" });
   postModel.find({ _id: { $in: postIds } }).populate("user")
   .then(posts => {
     // Now 'posts' contains an array of post objects
@@ -146,33 +147,33 @@ router.post(
   }
 );
 
-// router.post("/register", function (req, res) {
-//   let userdata = new userModel(({ username, email, fullname } = req.body));
-//   userModel.register(userdata, req.body.password).then(function () {
-//     passport.authenticate("local")(req, res, function () {
-//       res.redirect("/profile");
-//     });
-//   });
-// });
-
 router.post("/register", function (req, res) {
-  const { username, email, fullname, password } = req.body;
-
-  // Check if any required field is null
-  if (!username || !email || !fullname || !password) {
-    // Render an error page or send an appropriate response
-    return res.render("regLog", {error: req.flash("error"),
-  });
-  }
-
-  let userdata = new userModel({ username, email, fullname });
-
-  userModel.register(userdata, password).then(function () {
+  let userdata = new userModel(({ username, email, fullname } = req.body));
+  userModel.register(userdata, req.body.password).then(function () {
     passport.authenticate("local")(req, res, function () {
       res.redirect("/profile");
     });
   });
 });
+
+// router.post("/register", function (req, res) {
+//   const { username, email, fullname, password } = req.body;
+
+//   // Check if any required field is null
+//   if (!username || !email || !fullname || !password) {
+//     // Render an error page or send an appropriate response
+//     return res.render("regLog", {error: req.flash("error"),
+//   });
+//   }
+
+//   let userdata = new userModel({ username, email, fullname });
+
+//   userModel.register(userdata, password).then(function () {
+//     passport.authenticate("local")(req, res, function () {
+//       res.redirect("/profile");
+//     });
+//   });
+// });
 
 
 router.post(
