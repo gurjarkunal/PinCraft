@@ -26,34 +26,32 @@
       </div>
     </div>
     <h1 class="text-3xl font-semibold mt-3">@<%= user.username%></h1>
-    <h3 class="text-md mt-2"><%= user.fullname%></h3>
-    <a
+    <h3 class="text-md mt-2 "><%= user.fullname%></h3>
+    <!-- <a
       href="/edit"
       class="px-7 py-2 bg-zinc-700 rounded-full text-xs font-semibold mt-4"
       >Edit</a
-    >
+    > -->
     <a
       href="/add"
       class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-5"
     >
-      Add New Post
+      Create New Pin
     </a>
   </div>
-  <div class="cards flex flex-wrap gap-10 px-10 py-8">
+  <div class="cards container flex flex-wrap gap-5 px-10 py-8">
     <% user.posts.forEach(function(ele){%>
-    <a
+      <a
       href="/showfull/?img=/images/uploads/<%= ele.image %>&title=<%= ele.title %>&desc=<%= ele.description %>&username=<%= user.username %>"
-      class="card w-50"
+      class="card "
     >
-      <div class="w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
+      <div class="w-full h-[340px] bg-sky-200 rounded-lg overflow-hidden">
         <img
           class="w-full h-full object-cover"
           src="/images/uploads/<%= ele.image %>"
           alt=""
         />
       </div>
-      <!-- <h5 class="mt-2 text-sm"><%= ele.title %></h5>
-      <h5 class="mt-2 text-sm"><%= ele.description %></h5> -->
     </a>
     <%})%>
   </div>

@@ -1,14 +1,72 @@
-<% include ./partials/header.ejs %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title%></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style type="text/css">
+      .img_deg{
+        float: left;
+        width: 40%;
+        border-radius: 20px;
+        margin-right: 10px;
+      }
+
+      .post_cen{
+        margin: 20px;
+        position: absolute;
+        width: 90%;
+        justify-content: center;
+        display: flex;
+      }
+    </style>
+</head>
+<body>
+  <div class="nav w-full px-10 py-3 flex justify-between bg-zinc-700 text-white items-center z-10">
+    <a href="/feed" class="text-3xl text-red-500">PinCraft.</a>
+    <div class="flex gap-10 items-center">
+      <a href="/profile">Profile</a><a href="/feed">Feed</a><a href="/favourites">Favorites</a><a class="px-3 py-2 bg-red-700 text-white rounded-lg" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="post_cen">
+    <img class="img_deg" id="displayedImage" alt="Selected Image"/>
+
+    <div>
+      <div class="flex mt-2">
+        <h1 class="text-white">@</h1>
+        <h1 id="username" class="text-white"></h1>
+      </div>
+      <h5 id="imageTitle" class="mt-2 text-3xl text-white"></h5>
+      <h5 id="imageDescription" class="mt-2 text-xl text-zinc-400"></h5>
+    </div>
+
+  </div>
+
+  </div>
+</body>
+</html>
+
+
+
+ <!-- <% include ./partials/header.ejs %>
 <div class="w-full h-full bg-zinc-800 px-10 py-8 text-white flex items-center justify-center">
   <div class="card w-4/6 h-[40rem] flex border-white border rounded-lg overflow-hidden">
-    <!-- Left Side: Image Container -->
+
     <div class="w-1/2 h-full relative">
       <div class="absolute inset-0 bg-sky-200 rounded-lg overflow-hidden">
         <img class="w-full h-full object-cover" id="displayedImage" alt="Selected Image"/>
       </div>
     </div>
 
-    <!-- Right Side: Details Container -->
+
     <div class="w-1/2 px-2 flex flex-col">
       <div class="flex mt-2">
         <h1>@</h1>
@@ -20,7 +78,7 @@
   </div>
 </div>
 
-<% include ./partials/footer.ejs %>
+<% include ./partials/footer.ejs %>  -->
 
 
 <script>
