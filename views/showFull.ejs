@@ -12,22 +12,6 @@
     href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
     rel="stylesheet"/>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <style type="text/css">
-      .img_deg{
-        float: left;
-        width: 40%;
-        border-radius: 20px;
-        margin-right: 10px;
-      }
-
-      .post_cen{
-        margin: 20px;
-        position: absolute;
-        width: 90%;
-        justify-content: center;
-        display: flex;
-      }
-    </style>
 </head>
 <body>
   <div class="nav w-full px-10 py-3 flex justify-between bg-zinc-700 text-white items-center z-10">
@@ -38,7 +22,6 @@
   </div>
   <div class="post_cen">
     <img class="img_deg" id="displayedImage" alt="Selected Image"/>
-
     <div>
       <div class="flex mt-2">
         <h1 class="text-white">@</h1>
@@ -103,7 +86,8 @@
     document.getElementById("imageDescription").innerText = imageDetails.desc || "No Description";
 
     // Set the href dynamically
-    document.getElementById("postLink").href = `/favourites/post/${imageDetails.id}`;
+    document.getElementById("postLink").href = `/favourites/post/${1}`;
+
   } else {
     // Handle the case when no image path is provided
     console.error("No image path provided.");
