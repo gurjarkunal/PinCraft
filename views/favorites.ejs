@@ -5,7 +5,7 @@
     <div class="container_img">
       <a href="/showfull/?img=/images/uploads/<%= post.image %>&title=<%= post.title %>&desc=<%= post.description %>&username=<%= post.user.username %>" class="">
         <img src="/images/uploads/<%= post.image %>" alt="Your Image">
-        <a href="/favourites/post/<%= post._id %>" class="overlay">
+        <a href="/favourites/<%= post._id %>" class="overlay">
           <% if (user.favourites.indexOf(post._id) !== -1){ %>
             <i class="fa-solid fa-star i1"></i>
             <% } else { %>
