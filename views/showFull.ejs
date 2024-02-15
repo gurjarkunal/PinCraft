@@ -40,33 +40,6 @@
 </body>
 </html>
 
-
-
- <!-- <% include ./partials/header.ejs %>
-<div class="w-full h-full bg-zinc-800 px-10 py-8 text-white flex items-center justify-center">
-  <div class="card w-4/6 h-[40rem] flex border-white border rounded-lg overflow-hidden">
-
-    <div class="w-1/2 h-full relative">
-      <div class="absolute inset-0 bg-sky-200 rounded-lg overflow-hidden">
-        <img class="w-full h-full object-cover" id="displayedImage" alt="Selected Image"/>
-      </div>
-    </div>
-
-
-    <div class="w-1/2 px-2 flex flex-col">
-      <div class="flex mt-2">
-        <h1>@</h1>
-        <h1 id="username" class=""></h1>
-      </div>
-      <h5 id="imageTitle" class="mt-2 text-3xl"></h5>
-      <h5 id="imageDescription" class="mt-2 text-xl text-zinc-400"></h5>
-    </div>
-  </div>
-</div>
-
-<% include ./partials/footer.ejs %>  -->
-
-
 <script>
   // JavaScript function to get the image details from URL parameters
   function getImageDetailsFromURL() {
@@ -76,7 +49,6 @@
       title: urlParams.get("title"),
       desc: urlParams.get("desc"),
       username: urlParams.get("username"),
-      id: urlParams.get("id"),
     };
   }
 
@@ -87,9 +59,6 @@
     document.getElementById("username").innerText = imageDetails.username || "No Username";
     document.getElementById("imageTitle").innerText = imageDetails.title || "No Title";
     document.getElementById("imageDescription").innerText = imageDetails.desc || "No Description";
-
-    // Set the href dynamically
-    document.getElementById("postLink").href = `/favourites/post/${1}`;
 
   } else {
     // Handle the case when no image path is provided

@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const plm = require("passport-local-mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/pin");
+mongoose.connect("mongodb+srv://sharmakaratika57:kunal2425@pincraft.izgfmkp.mongodb.net/pin")
+// mongoose.connect("mongodb://127.0.0.1:27017/pin");
 
 // Define the user schema
 const userSchema = new Schema({
