@@ -2,8 +2,16 @@ require('dotenv').config()
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const plm = require("passport-local-mongoose");
-// mongoose.connect(process.env.MONGO)
-mongoose.connect("mongodb://127.0.0.1:27017/pin");
+
+//Cloud DataBase
+mongoose.connect(process.env.MONGO)
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.log("Mongo Error", err))
+
+//Local DataBase
+// mongoose.connect("mongodb://127.0.0.1:27017/pin")
+// .then(() => console.log("MongoDB Connected"))
+// .catch((err) => console.log("Mongo Error", err))
 
 // Define the user schema
 const userSchema = new Schema({
