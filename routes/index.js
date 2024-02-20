@@ -43,9 +43,26 @@ router.get("/showfull", isLoggedIn, async function (req, res, next) {
   res.render("showfull", { user, posts, nav: true, title: "PinCraft" });
 });
 
+router.get("/favourites", isLoggedIn, async function (req, res, next) {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const post = await userModel.find().populate("favourites");
+  const postIds = user.favourites.map((favourites) => favourites);
+  if (postIds.length <= 0)
+    res.render("favouritesEmpty", { nav: true, title: "Favorites" });
+  postModel
+    .find({ _id: { $in: postIds } })
+    .populate("user")
+    .then((posts) => {
+      res.render("favorites", { user, posts, nav: true, title: "Favorites" });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
 router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({ username: req.session.passport.user });
-  // console.log("I am here",req.params.id);
   const post = await postModel.findOne({ _id: req.params.id });
   const id = user.favourites.indexOf(post._id);
   if (id === -1) {
@@ -57,35 +74,9 @@ router.get("/favourites/post/:id", isLoggedIn, async function (req, res) {
   res.redirect("/feed");
 });
 
-router.get("/favourites", isLoggedIn, async function (req, res, next) {
-  const user = await userModel.findOne({ username: req.session.passport.user });
-  const post = await userModel.find().populate("favourites");
-  const postIds = user.favourites.map((favourites) => favourites);
-  if (postIds.length <= 0)
-    res.render("favouritesEmpty", { nav: true, title: "Favorites" });
-  postModel
-    .find({ _id: { $in: postIds } })
-    .populate("user")
-    .then((posts) => {
-      // Now 'posts' contains an array of post objects
-      // You can use 'posts' to render the data in your template
-      // res.render('favourites', { user, posts,  nav: true, title: "Favorites" });
-      res.render("favorites", { user, posts, nav: true, title: "Favorites" });
-    })
-    .catch((error) => {
-      // Handle the error appropriately
-      console.error(error);
-      res.status(500).send("Internal Server Error");
-    });
-  // console.log("I am here again",post);
-  // res.render("favourites", { user, post, nav: true, title: "Favourites" });
-});
-
 router.get("/favourites/:id", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({ username: req.session.passport.user });
-  // console.log("I am here",req.params.id);
   const post = await postModel.findOne({ _id: req.params.id });
-
   const id = user.favourites.indexOf(post._id);
   if (id === -1) {
     user.favourites.push(post._id);
@@ -94,7 +85,6 @@ router.get("/favourites/:id", isLoggedIn, async function (req, res) {
   }
 
   await user.save();
-  // console.log(post);
   res.redirect("/favourites");
 });
 
@@ -133,8 +123,7 @@ router.post("/edit", isLoggedIn, async function (req, res) {
   res.redirect('/profile')
 });
 
-router.post(
-  "/createpost",
+router.post("/createpost",
   isLoggedIn,
   upload.single("postimage"),
   async function (req, res, next) {
@@ -153,8 +142,7 @@ router.post(
   }
 );
 
-router.post(
-  "/fileupload",
+router.post("/fileupload",
   isLoggedIn,
   upload.single("image"),
   async function (req, res, next) {
@@ -176,8 +164,7 @@ router.post("/register", function (req, res) {
   });
 });
 
-router.post(
-  "/login",
+router.post("/login",
   passport.authenticate("local", {
     successRedirect: "/feed",
     failureRedirect: "/",

@@ -71,7 +71,8 @@ body{
 }
 
 .container button:hover{
-    box-shadow: 0px 1px 10px 5px rgba(255,0,0,1);
+    font-size: 1.2rem;
+    box-shadow: 0px 0px 50px 10px rgba(255,0,0,1);
 }
 
 .container button.hidden{
@@ -149,16 +150,16 @@ body{
 }
 
 .social-icons .icon1:hover{
-    box-shadow: 0 1px 10px 5px red;
+    box-shadow: 0 0px 30px 5px red;
 }
 .social-icons .icon2:hover{
-    box-shadow: 0 1px 10px 5px yellow;
+    box-shadow: 0 0px 30px 5px yellow;
 }
 .social-icons .icon3:hover{
-    box-shadow: 0 1px 10px 5px rgb(44, 255, 44);
+    box-shadow: 0 0px 30px 5px rgb(44, 255, 44);
 }
 .social-icons .icon4:hover{
-    box-shadow: 0 1px 10px 5px blue;
+    box-shadow: 0 0px 30px 5px blue;
 }
 
 .social-icons a{

@@ -42,7 +42,7 @@
       <div class="box">
         <% user.posts.forEach(function(ele) { %>
         <a
-          href="/showfull/?img=/images/uploads/<%= ele.image %>&title=<%= ele.title %>&desc=<%= ele.description %>&username=<%= user.username %>&id=<%= ele._id %>"
+          href="/showfull/?img=/images/uploads/<%= ele.image %>&title=<%= ele.title %>&desc=<%= ele.description %>&username=<%= user.username %>"
         >
             <img class="" src="/images/uploads/<%= ele.image %>" alt="" />
         </a>

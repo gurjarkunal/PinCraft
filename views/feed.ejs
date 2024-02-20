@@ -3,7 +3,7 @@
   <% posts.reverse().forEach(function(ele){ %>
   <div class="box">
     <div class="container_img">
-      <a href="/showfull/?img=/images/uploads/<%= ele.image %>&title=<%= ele.title %>&desc=<%= ele.description %>&username=<%= ele.user.username %>&id=<%= ele._id %>" class="">
+      <a href="/showfull/?img=/images/uploads/<%= ele.image %>&title=<%= ele.title %>&desc=<%= ele.description %>&username=<%= ele.user.username %>" class="">
         <img src="/images/uploads/<%= ele.image %>" alt="Your Image">
         <a href="/favourites/post/<%= ele._id %>" class="overlay">
           <% if (user.favourites.indexOf(ele._id) !== -1){ %>
