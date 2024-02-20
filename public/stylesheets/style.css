@@ -39,6 +39,22 @@ html, body{
 }
 
 
+.edit_form_btn:hover{
+  box-shadow: 0px 1px 10px 5px rgba(255,0,0,1);
+}
+
+.edit_btn{
+  background-color: darkgrey;
+  color: black;
+  font-size: .8rem;
+  font-weight: bold;
+}
+
+.edit_btn:hover{
+  background-color: rgb(101, 101, 101)
+  ;
+  box-shadow: 0px 1px 10px 5px black;
+}
 
 .img_deg{
   float: left;
@@ -120,6 +136,19 @@ a img:hover{
 .i2{
   font-size: 1.5rem;
   color: white;
+}
+
+.label{
+  margin-left: 10px;
+}
+.username{
+  text-align: start;
+}
+.fullname{
+  text-align: start;
+}
+.email{
+  text-align: start;
 }
 
 .footer{
