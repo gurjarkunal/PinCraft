@@ -12,13 +12,16 @@
         </div>
         <div class="fullname">
             <label class="label" for="">Full Name</label>
-        <input class="bg-black w-96 rounded-full text-white px-5 py-2 block mb-6" type="text" name="fullname" value=<%= user.fullname %>>
+        <input class="bg-black w-96 rounded-full text-white px-5 py-2 block mb-6" type="text" name="fullname" value="<%= user.fullname %>">
         </div>
-        <input class="edit_form_btn bg-red-600 font-semibold rounded-full px-10  mt-10 p-2" type="submit" value="Update Details">
+        <div class="mobileno">
+            <label class="label" for="">Mobile No.</label>
+        <input class="bg-black w-96 rounded-full text-white px-5 py-2 block mb-6" type="text" name="mobileno" value=<%= user.mobileno %>>
+        </div>
+        <input class="edit_form_btn bg-red-600 font-semibold rounded-full px-10  mt-5 p-2" type="submit" value="Update Details">
     </form>
 </div>
 
 <script>
-    console.log(user.username)
 </script>
 <% include ./partials/footer.ejs %>

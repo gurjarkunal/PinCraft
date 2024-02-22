@@ -23,6 +23,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+
+  mobileno: {
+    type: String,
+    require: true,
+  },
+
   fullname: {
     type: String,
     required: true,
@@ -48,6 +54,18 @@ const userSchema = new Schema({
       ref: "post",
     },
   ],
+
+  otp: {
+    type: String,
+    required: true,
+  },
+
+  otpExpiration: {
+    type: Date,
+    default: Date.now,
+    get: (otpExpiration) => otpExpiration.getTime(),
+    set: (otpExpiration) => new Date(otpExpiration),
+  },
 });
 
 userSchema.plugin(plm)

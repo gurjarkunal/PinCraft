@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Empty now
-    </h1>
-</body>
-</html>
+<% include ./partials/header.ejs %>
+<div class="flex items-center">
+    <p class="m-10 w-3/4 text-3xl font-semibold items-start">Change Password</p>
+    <a href="/" class="forget_login bg-red-600 font-semibold rounded-full p-2 text-center">Login</a>
+</div>
+<div class="forget_container">
+
+    <form class="form_otp"  action="/forgetPass" method="post">
+        <p class="mb-10 text-2xl">Enter your mobile number for OTP</p>
+        <div class="mobileno flex">
+            <div class="mno_box">
+                <input id="mno" class="bg-black w-96 rounded-full text-white
+                px-5 py-2" type="text" name="mobileno" placeholder="Mobile No." required>
+            </div>
+            <input type="submit" class="forget_form_send_btn bg-red-600 font-semibold rounded-full px-6 ml-10 p-2" name="submit" id="" value="Send OTP">
+        </div>
+    </form>
+</div>
+<script>
+</script>
+<% include ./partials/footer.ejs %>

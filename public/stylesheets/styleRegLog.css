@@ -115,6 +115,10 @@ body{
     z-index: 2;
 }
 
+.text-white{
+    margin-bottom: 15px;
+}
+
 .container.active .sign-in{
     transform: translateX(100%);
 }
@@ -133,6 +137,11 @@ body{
     animation: move 0.6s;
 }
 
+.forget_pass:hover{
+    font-size: 1rem;
+    color: red;
+}
+
 @keyframes move{
     0%, 49.99%{
         opacity: 0;
@@ -146,7 +155,6 @@ body{
 
 .social-icons{
     margin: 20px 0;
-    
 }
 
 .social-icons .icon1:hover{

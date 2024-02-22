@@ -1,0 +1,17 @@
+<% include ./partials/header.ejs %>
+<div class="mt-10">
+    <a href="/" class="forget_login bg-red-600  mt-10 px-7 font-semibold rounded-full p-2 text-center">Login</a>
+</div>
+<div class="otp_container flex h-96 mt-10 justify-center items-center ">
+    <div class="otp_form_container">
+        <p class="text-3xl">Enter the OTP for mobile number +91<%= mno %> </p>
+        <form class="" action="/verifyotp" method="post">
+            <input class="bg-black rounded-full w-52 mt-10 p-2 block hidden" type="text" name="mobileno" id="mobileno" value="<%= mno %>" >
+            <input class="bg-black rounded-full w-52 mt-10 p-2 block" type="text" name="otp" id="otp" placeholder="OTP" required>
+            <input class="otp_submit bg-red-600 mt-10  rounded-full px-6 p-2 text-xl font-semibold" type="submit" name="" id="" value="Submit">
+        </form>
+    </div>
+</div>
+<script>
+</script>
+<% include ./partials/footer.ejs %>
