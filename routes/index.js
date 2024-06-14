@@ -149,11 +149,11 @@ router.post("/forgetpass", async function(req, res){
     {otp, otpExpiration: new Date(cDate.getTime())},
   )
 
-  // await client.messages.create({
-  //   body: `Your OTP for password update is ${otp}`,
-  //   to: compmno,
-  //   from: process.env.TWILIO_PHONE_NO,
-  // })
+  await client.messages.create({
+    body: `Your OTP for password update is ${otp}`,
+    to: compmno,
+    from: process.env.TWILIO_PHONE_NO,
+  })
   res.render('verifyotp', {mno, nav: false, title: "Verify OTP"})
 })
 
